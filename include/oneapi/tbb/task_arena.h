@@ -88,6 +88,7 @@ TBB_EXPORT void __TBB_EXPORTED_FUNC initialize(d1::task_arena_base&);
 TBB_EXPORT void __TBB_EXPORTED_FUNC terminate(d1::task_arena_base&);
 TBB_EXPORT bool __TBB_EXPORTED_FUNC attach(d1::task_arena_base&);
 TBB_EXPORT void __TBB_EXPORTED_FUNC execute(d1::task_arena_base&, d1::delegate_base&);
+TBB_EXPORT void __TBB_EXPORTED_FUNC set_task_exit(d1::task_arena_base&, bool);
 TBB_EXPORT void __TBB_EXPORTED_FUNC wait(d1::task_arena_base&);
 TBB_EXPORT int  __TBB_EXPORTED_FUNC max_concurrency(const d1::task_arena_base*);
 TBB_EXPORT void __TBB_EXPORTED_FUNC isolate_within_arena(d1::delegate_base& d, std::intptr_t);
@@ -430,6 +431,10 @@ public:
     int max_concurrency() const {
         // Handle special cases inside the library
         return (my_max_concurrency > 1) ? my_max_concurrency : r1::max_concurrency(this);
+    }
+
+    void set_task_exit(bool exit) {
+        r1::set_task_exit(*this, exit);
     }
 
     friend void submit(task& t, task_arena& ta, task_group_context& ctx, bool as_critical) {

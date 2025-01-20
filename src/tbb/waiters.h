@@ -70,6 +70,10 @@ public:
                         return true;
                     }
 
+                    if (my_arena.is_task_exit()) {
+                        break;
+                    }
+
                     if (my_arena.my_threading_control->is_any_other_client_active()) {
                         break;
                     }

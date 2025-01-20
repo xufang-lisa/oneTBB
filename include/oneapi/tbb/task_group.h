@@ -60,6 +60,7 @@ struct task_arena_impl;
 class context_list;
 
 TBB_EXPORT void __TBB_EXPORTED_FUNC execute(d1::task_arena_base&, d1::delegate_base&);
+TBB_EXPORT void __TBB_EXPORTED_FUNC set_task_exit(d1::task_arena_base&, bool);
 TBB_EXPORT void __TBB_EXPORTED_FUNC isolate_within_arena(d1::delegate_base&, std::intptr_t);
 
 TBB_EXPORT void __TBB_EXPORTED_FUNC initialize(d1::task_group_context&);

@@ -503,6 +503,7 @@ struct task_arena_impl {
     static void wait(d1::task_arena_base&);
     static int max_concurrency(const d1::task_arena_base*);
     static void enqueue(d1::task&, d1::task_group_context*, d1::task_arena_base*);
+    static void set_task_exit(d1::task_arena_base&, bool);
 };
 
 void __TBB_EXPORTED_FUNC initialize(d1::task_arena_base& ta) {
@@ -516,6 +517,9 @@ bool __TBB_EXPORTED_FUNC attach(d1::task_arena_base& ta) {
 }
 void __TBB_EXPORTED_FUNC execute(d1::task_arena_base& ta, d1::delegate_base& d) {
     task_arena_impl::execute(ta, d);
+}
+void __TBB_EXPORTED_FUNC set_task_exit(d1::task_arena_base& ta, bool exit) {
+    task_arena_impl::set_task_exit(ta, exit);
 }
 void __TBB_EXPORTED_FUNC wait(d1::task_arena_base& ta) {
     task_arena_impl::wait(ta);
@@ -814,6 +818,13 @@ void task_arena_impl::execute(d1::task_arena_base& ta, d1::delegate_base& d) {
         throw;
     }
 #endif
+}
+
+void task_arena_impl::set_task_exit(d1::task_arena_base& ta, bool exit) {
+    arena* a = ta.my_arena.load(std::memory_order_relaxed);
+    if (a) {
+        a->set_task_exit(exit);
+    }
 }
 
 void task_arena_impl::wait(d1::task_arena_base& ta) {

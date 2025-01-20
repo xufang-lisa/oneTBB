@@ -227,6 +227,8 @@ struct arena_base : padded<intrusive_list_node> {
     //! Current task pool state and estimate of available tasks amount.
     atomic_flag my_pool_state;
 
+    atomic_flag my_task_state;
+
     //! The list of local observers attached to this arena.
     observer_list my_observers;
 
@@ -361,6 +363,16 @@ public:
     bool has_tasks();
 
     bool is_empty() { return my_pool_state.test() == /* EMPTY */ false; }
+
+    bool is_task_exit() { return my_task_state.test() == true; }
+
+    void set_task_exit(bool exit) {
+        if (exit) {
+            my_task_state.test_and_set();
+        } else {
+            my_task_state.try_clear_if([] { return true; });
+        }
+    }
 
     thread_control_monitor& get_waiting_threads_monitor();
 
