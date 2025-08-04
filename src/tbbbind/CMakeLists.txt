@@ -95,7 +95,7 @@ endmacro()
 
 tbbbind_build(tbbbind     HWLOC::hwloc_1_11)
 tbbbind_build(tbbbind_2_0 HWLOC::hwloc_2   )
-tbbbind_build(tbbbind_2_4 HWLOC::hwloc_2_4 )
+tbbbind_build(tbbbind_2_5 HWLOC::hwloc_2_5 )
 
 if (DEFINED CMAKE_SKIP_BUILD_RPATH_OLD_VALUE)
     set(CMAKE_SKIP_BUILD_RPATH ${CMAKE_SKIP_BUILD_RPATH_OLD_VALUE})
