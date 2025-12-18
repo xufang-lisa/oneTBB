@@ -22,6 +22,7 @@ TBB_ENABLE_IPO - Enable Interprocedural Optimization (IPO) during the compilatio
 TBB_BUILD_APPLE_FRAMEWORKS - Enable the Apple* frameworks instead of dylibs, only available on the Apple platform. (OFF by default)
 TBB_FILE_TRIM - Enable __FILE__ trim, replace a build-time full path with a relative path in the debug info and macro __FILE__; use it to make
            reproducible location-independent builds (ON by default)
+TBB_RELEASE_PDB:BOOL - Generate pdb files for release libraries (OFF by default)
 ```
 
 ## Configure, Build, and Test

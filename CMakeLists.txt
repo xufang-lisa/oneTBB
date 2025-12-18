@@ -108,6 +108,7 @@ option(TBB_ENABLE_IPO "Enable Interprocedural Optimization (IPO) during the comp
 option(TBB_FUZZ_TESTING "Enable fuzz testing" OFF)
 option(TBB_INSTALL "Enable installation" ON)
 option(TBB_FILE_TRIM "Enable __FILE__ trim" ON)
+option(TBB_RELEASE_PDB "Generate pdb files for release libraries" OFF)
 if(APPLE)
 option(TBB_BUILD_APPLE_FRAMEWORKS "Build as Apple Frameworks" OFF)
 endif()
