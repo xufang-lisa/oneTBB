@@ -101,3 +101,14 @@ endif()
 
 set(TBB_OPENMP_FLAG /openmp)
 set(TBB_OPENMP_NO_LINK_FLAG TRUE) # TBB_OPENMP_FLAG will be used only on compilation but not on linkage
+
+set(TBB_LIB_COMPILE_FLAGS ${TBB_LIB_COMPILE_FLAGS} /guard:cf)
+set(TBB_LIB_LINK_FLAGS ${TBB_LIB_LINK_FLAGS} /guard:cf)
+
+if (TBB_USE_STATIC_RUNTIME)
+    if (CMAKE_BUILD_TYPE MATCHES "Debug")
+        set(TBB_LIB_LINK_FLAGS ${TBB_LIB_LINK_FLAGS} /NODEFAULTLIB:libucrtd.lib /DEFAULTLIB:ucrtd.lib)
+    else()
+        set(TBB_LIB_LINK_FLAGS ${TBB_LIB_LINK_FLAGS} /NODEFAULTLIB:libucrt.lib /DEFAULTLIB:ucrt.lib)
+    endif()
+endif()
