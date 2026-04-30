@@ -1,4 +1,5 @@
 # Copyright (c) 2020-2024 Intel Corporation
+# Copyright (c) 2026 UXL Foundation Contributors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,7 +51,7 @@ target_include_directories(tbbmalloc
 # TODO: fix warnings
 if (MSVC)
     # signed unsigned mismatch, declaration hides class member
-    set(TBB_WARNING_SUPPRESS ${TBB_WARNING_SUPPRESS} /wd4267 /wd4244 /wd4245 /wd4458)
+    set(TBB_WARNING_SUPPRESS ${TBB_WARNING_SUPPRESS} /wd4245 /wd4458)
 endif()
 
 target_compile_options(tbbmalloc
